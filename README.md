@@ -99,13 +99,13 @@ every model's OOF AUC is directly comparable.
 
 Best OOF AUC per model after tuning (from `model_comparison.csv`):
 
-| Model | Best feature set | OOF AUC |
-|---|---|---|
-| CatBoost | Base + Bin + Digit | 0.95555 |
-| XGBoost | Base | 0.95553 |
-| LightGBM | Base + Digit | 0.95542 |
-| RealMLP | Base + Bin + Digit | 0.95493 |
-| Logistic Regression | Base + Bin + Digit | 0.95332 |
+| Model | Best feature set | OOF AUC  |
+|---|---|----------|
+| CatBoost | Base + Bin + Digit | 0.955545 |
+| XGBoost | Base | 0.95553  |
+| LightGBM | Base + Digit | 0.95542  |
+| RealMLP | Base + Bin + Digit | 0.95493  |
+| Logistic Regression | Base + Bin + Digit | 0.95332  |
 
 Final ensemble weights (Optuna, maximizing OOF AUC):
 
@@ -166,10 +166,6 @@ jupyter notebook main.ipynb
 Running all cells reproduces the model comparison (`model_comparison.csv`), retrains and saves
 the five models plus the ensemble under `models/`, and writes the final `submission.csv`
 (270,000 predicted probabilities).
-
-> **Note:** the full run (grid comparison + Optuna tuning + 5000-trial ensemble search) is
-> compute-heavy. To reuse already-fitted models instead of retraining, load them with
-> `load_oof_model("models/<file>.joblib")`.
 
 ---
 
