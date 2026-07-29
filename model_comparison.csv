@@ -1,0 +1,13 @@
+﻿model,feature_set,oof_auc
+catboost,Base + Digit,0.955504172166006
+catboost,Base + Bin + Digit,0.9555015328750192
+catboost,Base,0.9554478227105623
+catboost,Base + Bin,0.9554444786422528
+xgboost,Base + Bin + Digit,0.9552472276565996
+lightgbm,Base + Bin + Digit,0.9552145384728236
+lightgbm,Base + Digit,0.9552080173496357
+lightgbm,Base + Bin,0.9551608471540419
+xgboost,Base + Bin,0.955156773376091
+lightgbm,Base,0.9551532432245647
+xgboost,Base + Digit,0.9551525658906204
+xgboost,Base,0.954764928130568
