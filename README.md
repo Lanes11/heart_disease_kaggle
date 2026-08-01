@@ -75,8 +75,7 @@ These produce four feature sets that are all benchmarked: `Base`, `Base + Bin`, 
 All models share a small reusable framework built around a single higher-order training loop:
 
 `train_oof(X, y, cv, fit_fold, predict_fold, name)` — owns the shared cross-validation loop, out-of-fold prediction
-assembly, and per-fold + overall AUC scoring. Each backend plugs in only two callbacks: `fit_fold` (train one fold,
-return an artifact) and `predict_fold` (score a fold from that artifact).
+assembly, and per-fold + overall AUC scoring.
 
 Backends (each supplies its own fit_fold / predict_fold):
 
@@ -87,9 +86,9 @@ Backends (each supplies its own fit_fold / predict_fold):
 - `train_catboost` — native categorical handling via Pool and use_best_model=True.
 
 `predict_test(fold_models, predict_fold, X_test)` — scores the test set with every fold model and averages the
-predictions (bagged inference), so no single fold model has to be picked.
+predictions.
 
-Training uses the GPU (the notebook was run on an NVIDIA RTX 3070 with CUDA); XGBoost is moved back to CPU before
+Training uses the GPU; XGBoost is moved back to CPU before
 pickling so saved models load anywhere.
 
 Cross-validation is a shared `StratifiedKFold(n_splits=5, shuffle=True, random_state=42)`, so every model's OOF AUC is
@@ -107,7 +106,7 @@ Best OOF AUC per model after tuning (from `model_comparison.csv`):
 | XGBoost  | Base + Bin + Digit | 0.9552  |
 | LightGBM | Base + Bin + Digit | 0.9552  |
 
-Final ensemble weights (Optuna, maximizing OOF AUC):
+Final ensemble weights:
 
 | Model    | Weight |
 |----------|--------|
@@ -115,9 +114,7 @@ Final ensemble weights (Optuna, maximizing OOF AUC):
 | XGBoost  | 0.4591 |
 | LightGBM | 0.0001 |
 
-- **Ensemble OOF AUC:** `0.955608` (a small gain over the best single model, `0.9555`).
-
-The ensemble is effectively a CatBoost + XGBoost blend; the other models add negligible weight.
+**Ensemble OOF AUC:** `0.955608` (a small gain over the best single model, `0.9555`).
 
 ---
 
@@ -129,7 +126,7 @@ heart_disease_kaggle/
 ├── datasets/
 │   ├── train.csv             # 630k rows
 │   └── test.csv              # 270k rows
-├── models/                   # Saved artifacts
+├── models/
 │   ├── best_params.json      # Best params for each models
 │   ├── best_w.json           # Best weight for ensemble
 │   └── <Model>_folds.joblib  # Per-model fitted CV folds
