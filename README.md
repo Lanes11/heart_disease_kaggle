@@ -2,7 +2,7 @@
 
 A weighted ensemble of three machine-learning gradient boosting models that predicts the **probability of heart
 disease**. Built for
-a [Kaggle binary classification competition]((https://www.kaggle.com/competitions/playground-series-s6e2)) (metric: ROC
+a [Kaggle binary classification competition](https://www.kaggle.com/competitions/playground-series-s6e2) (metric: ROC
 AUC).
 
 **Leaderboard result:** `0.95521` private / `0.95375` public.
